@@ -18,7 +18,6 @@ app.use(cors())
 
 app.get('/', (req, res) => {
   const url = oAuth2Client.generateAuthUrl({
-    access_type: 'offline',
     scope: ['https://www.googleapis.com/auth/userinfo.profile',
             'https://www.googleapis.com/auth/userinfo.email'],
   });
@@ -29,11 +28,10 @@ app.get('/', (req, res) => {
 app.get('/Callback', async (req, res) => {
   const { code } = req.query;
 
-  const { tokens } = await oAuth2Client.getToken();
-  console.log(tokens)
+  const { tokens } = await oAuth2Client.getToken(code);
   res.send(tokens);
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server listening on http://localhost:${process.env.PORT}`);
+  console.log(`Server listening on ${process.env.BASE_URL}:${process.env.PORT}`);
 });
