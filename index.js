@@ -11,7 +11,7 @@ const clientSecret = process.env.CLIENT_SECRET;
 const oAuth2Client = new google.auth.OAuth2(
   clientId,
   clientSecret,
-  `${process.env.BASE_URL}:${process.env.PORT}/Callback`
+  `${process.env.BASE_URL}/Callback`
 );
 
 app.use(cors())
